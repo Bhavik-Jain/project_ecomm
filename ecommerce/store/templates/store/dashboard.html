@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>E-Commerce</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+    </head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="col-md">
+                    <h1 class="main-title">--- Dashboard ---</h1>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="col-md">
+                    <a href="{% url 'products' %}" class="btn btn-primary">View Products</a>
+                    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card card-body">
+                    <!-- <a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a> -->
+                    <h5>CUSTOMERS:</h5>
+                    <hr>
+                    <table class="table table-sm">
+                        <tr>
+                            <th></th>
+                            <th>Customer</th>
+                            <th>Phone No.</th>
+                        </tr>
+                        {% for i in customers %}
+                            <tr>
+                                <td><a class="btn btn-sm btn-info" href="{% url 'customer' i.id %}">View</a></td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.phone}}</td>
+                            </tr> 
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        
+            <div class="col-md-7">
+                <div class="card card-body">
+                    <h5>LAST 5 ORDERS</h5>
+                    <hr>
+                    <table class="table table-sm">
+                        <tr>
+                            <th>Product</th>
+                            <th>Date Orderd</th>
+                            <th>quantity</th>
+                            <th>Update</th>
+                            <th>Remove</th>
+                        </tr>
+                        {% for i in items %}
+                            {% if forloop.counter <= 5 %}
+                                <tr>
+                                    <td>{{i.product}}</td>
+                                    <td>{{i.date_added}}</td>
+                                    <td>{{i.quantity}}</td>
+                                    <td><a class="btn btn-sm btn-info" href="">Update</a></td>
+                                    <td><a class="btn btn-sm btn-danger" href="">Delete</a></td>
+                                </tr>
+                            {% endif %} 
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
