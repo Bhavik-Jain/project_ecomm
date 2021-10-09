@@ -61,7 +61,7 @@
                             <th>Remove</th>
                         </tr>
                         {% for i in items %}
-                            {% if forloop.counter <= 5 %}
+                            {% if forloop.revcounter <= 5 %}
                                 <tr>
                                     <td>{{i.product}}</td>
                                     <td>{{i.date_added}}</td>

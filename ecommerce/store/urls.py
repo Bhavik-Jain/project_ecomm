@@ -11,10 +11,11 @@ urlpatterns = [
     path('products/', views.products, name='products'),
     path('customer/<str:pk>/', views.customer, name='customer'),
     path('profile/', views.profilePage, name="profile"),
+    path('order_history/', views.order_history, name='order_history'),
 
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
-    path('', views.store, name='store'),
+    path('home/', views.store, name='store'),
     path('update_item/', views.updateItem, name='update_item'),
     path('process_order/', views.processOrder, name='process_order'),
 ]

@@ -11,9 +11,11 @@
                 <tr>
                     <th><h5>Total Items: <strong>{{order.get_cart_items}}</strong></h5></th>
                     <th><h5>Total Cart Value:<strong> ${{order.get_cart_total}}</strong></h5></th>
-                    <th>
-                        <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
-                    </th>
+                    {% if order.get_cart_total != 0 %}
+                        <th>
+                            <a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+                        </th>
+                    {% endif %}        
                 </tr>
             </table>
 		</div>

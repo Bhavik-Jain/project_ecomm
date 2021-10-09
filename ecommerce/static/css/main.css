@@ -104,3 +104,19 @@ h1,h2,h3,h4,h5,h6{
 	justify-content: center;
 	margin-top: 0%;
 }
+
+.border-top {
+	border-top: 1px solid #edf0f5 !important; }
+  
+.site-footer {
+padding: 4em 0; }
+.site-footer ul li {
+margin-bottom: 10px; }
+.site-footer ul li a {
+color: #5c626e; }
+.site-footer ul li a:hover {
+	color: #1f4f7c; }
+.site-footer .footer-heading {
+	font-size: 20px;
+	color: #25262a; 
+}

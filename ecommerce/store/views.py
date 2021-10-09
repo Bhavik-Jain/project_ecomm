@@ -96,12 +96,6 @@ def checkout(request):
 	items = data['items']
 	order = data['order']
 
-	# if request.user.is_authenticated:
-	# 	customer = request.user.customer
-	# 	order, created = Order.objects.get_or_create(customer=customer, complete=False)
-	# 	items = order.orderitem_set.all()
-	# 	cartItems = order.get_cart_items
-
 	context = {'items':items, 'order': order, 'cartItems': cartItems}
 	return render(request, 'store/checkout.html', context)
 
@@ -125,6 +119,7 @@ def updateItem(request):
 	elif action == 'remove':
 		orderItem.quantity = (orderItem.quantity - 1)
 
+	orderItem.customer = request.user.customer
 	orderItem.save()
 
 
@@ -164,9 +159,22 @@ def processOrder(request):
 
 	return JsonResponse('Payment Complete!', safe=False)
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['customer'])
+# def order_history(request):
+# 	customer = Customer.objects.get(user_id=request.user.id)
+# 	orders = customer.orderitem_set.all()
 
+# 	context = {'orders': orders}
 
-from .decorators import admin_only
+# 	return render(request, 'store/order_history.html', context)
+def order_history(request):
+	customer= Customer.objects.get(id=request.user.id)
+	orders = Order.orderitem_set.all().filter(customer_id=customer)
+
+	context = {'orders': orders}
+
+	return render(request,'store/order_history.html',context)
 
 @login_required(login_url='login')
 @admin_only
